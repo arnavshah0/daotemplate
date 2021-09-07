@@ -76,8 +76,9 @@ contract daotemplate is ERC20, ERC20Burnable {
     function withdraw() external {
         require(staked[msg.sender] == true, 'has not staked');
         _burn(msg.sender, 1);
-        staked[msg.sender] == false;
+        staked[msg.sender] = false;
         uint transfervalue = amountstaked[msg.sender];
+        amountstaked[msg.sender] = 0;
         totalmembers--;
         payable(msg.sender).transfer(transfervalue);
     }
